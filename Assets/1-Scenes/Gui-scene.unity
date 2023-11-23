@@ -408,21 +408,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 330585548}
-    - target: {fileID: 6371809260319897228, guid: 87b012fb3683435448b0add09c3de3b3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RotateRight
-      objectReference: {fileID: 0}
     - target: {fileID: 6764723366746442726, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 330585548}
-    - target: {fileID: 6764723366746442726, guid: 87b012fb3683435448b0add09c3de3b3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RotateLeft
-      objectReference: {fileID: 0}
     - target: {fileID: 8619693136159524270, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
       propertyPath: m_Pivot.x
