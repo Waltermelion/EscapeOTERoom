@@ -31,6 +31,3 @@ with mp_hands.Hands(static_image_mode=False, max_num_hands=2, min_detection_conf
       sock.sendto(str(results).encode(), ('localhost', 12345))
 
 cap.release()
-
-
-
