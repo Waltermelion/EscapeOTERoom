@@ -33,7 +33,23 @@ public class HandFinder : WebCamera
             if (area > MinArea)
             {
                 drawContour(processImage, new Scalar(127, 127, 127), 2, points);
-            }
+                // Calcular o centro
+                Point center = new Point(0, 0);
+
+                // Iteramos por todos os pontos
+                foreach (var point in points)
+                {
+                    // Somamos todos os pontos ao centro
+                    center.X += point.X;
+                    center.Y += point.Y;
+                }
+
+                // Dividimos pelo numero de pontos para obter o centro
+                center.X /= points.Length;
+                center.Y /= points.Length;
+                Debug.Log(center);
+                Cv2.Line(processImage, center, center, new Scalar(127, 127, 127), 3);
+            }            
         }
 
         if (output == null)        
