@@ -327,7 +327,7 @@ MonoBehaviour:
   imageFlip: 1
   threshold: 96.4
   showProcessingImage: 1
-  CurveAccuracy: 5
+  CurveAccuracy: 10
   MinArea: 5000
 --- !u!1 &4601691951170893761
 GameObject:
