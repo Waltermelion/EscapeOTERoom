@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +5,8 @@ public class Camaracontroler : MonoBehaviour
 {
     //Velocidade de rotação da camara;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private GameObject[] camPositions;
+    private GameObject lastpostition;
 
     //É chamado quando o jogador faz o gesto de rodar para a esquerda
     public void RotateLeft()

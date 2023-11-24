@@ -24,7 +24,7 @@ public class HandFinder : WebCamera
         Cv2.CvtColor(image, processImage, ColorConversionCodes.BGR2GRAY);
         Cv2.Threshold(processImage, processImage, threshold, 255, ThresholdTypes.BinaryInv);
         Cv2.FindContours(processImage, out contours,out hierachy, RetrievalModes.Tree, ContourApproximationModes.ApproxSimple, null);
-
+        
         foreach (Point[] contour in contours)
         {
             Point[] points = Cv2.ApproxPolyDP(contour, CurveAccuracy, true);
