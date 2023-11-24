@@ -324,6 +324,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Surface: {fileID: 4140301077962405749}
+  imageFlip: 1
+  threshold: 96.4
+  showProcessingImage: 1
+  CurveAccuracy: 5
+  MinArea: 5000
 --- !u!1 &4601691951170893761
 GameObject:
   m_ObjectHideFlags: 0
