@@ -1,77 +1,115 @@
 using OpenCvSharp;
 using OpenCvSharp.Demo;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HandFinder : WebCamera
 {
     [SerializeField] private FlipMode imageFlip;
-    [SerializeField] private float threshold = 96.4f;
     [SerializeField] private bool showProcessingImage = true;
-    [SerializeField] private float CurveAccuracy = 10f;
-    [SerializeField] private float MinArea = 5000f;
 
-    private CascadeClassifier cClassifier;
-    private Mat image;
-    private Mat processImage = new Mat();
-    private Point[][] contours;
-    private HierarchyIndex[] hierachy;
-    private OpenCvSharp.Rect myHand;
+    private CascadeClassifier fistClassifier, leftClassifier, rightClassifier, lPalmClassifier, rPalmClassifier;
+    private Mat image, processImage;
+    private OpenCvSharp.Rect myFist, myLeft, myRight, myLPalm, myRPalm;
+
+    // Events
+    public UnityEvent<OpenCvSharp.Rect> fistDetected, leftDetected, rightDetected, lPalmDetected, rPalmDetected;
 
     private void Start()
     {
-        cClassifier = new CascadeClassifier();        
-        var cascadeFilename = Application.dataPath + "/Resources/" + "fist.xml";
-        cClassifier.Load(cascadeFilename);
+        // Initializations
+        fistClassifier = new CascadeClassifier();
+        leftClassifier = new CascadeClassifier();
+        rightClassifier = new CascadeClassifier();
+        lPalmClassifier = new CascadeClassifier();
+        rPalmClassifier = new CascadeClassifier();
+        processImage = new Mat();
+
+        // Paths for the XML files
+        var fistFile = Application.dataPath + "/Resources/" + "fist.xml";
+        var leftFile = Application.dataPath + "/Resources/" + "left.xml";
+        var rightFile = Application.dataPath + "/Resources/" + "right.xml";
+        var leftPalmFile = Application.dataPath + "/Resources/" + "lpalm.xml";
+        var rightPalmFile = Application.dataPath + "/Resources/" + "rpalm.xml";
+
+        // Loading
+        fistClassifier.Load(fistFile);
+        leftClassifier.Load(leftFile);
+        rightClassifier.Load(rightFile);
+        lPalmClassifier.Load(leftPalmFile);
+        rPalmClassifier.Load(rightPalmFile);
+
     }
     protected override bool ProcessTexture(WebCamTexture input, ref Texture2D output)
     {
         image = OpenCvSharp.Unity.TextureToMat(input);        
 
+        // Image Filtering 
         Cv2.Flip(image, image, imageFlip);
-        /*Cv2.CvtColor(image, processImage, ColorConversionCodes.BGR2GRAY);
-        Cv2.Threshold(processImage, processImage, threshold, 255, ThresholdTypes.BinaryInv);
-        Cv2.FindContours(processImage, out contours,out hierachy, RetrievalModes.Tree, ContourApproximationModes.ApproxSimple, null);*/
-
         Cv2.CvtColor(image, processImage, ColorConversionCodes.BGR2GRAY);
-        var hand = cClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
-        if (hand.Length >= 1)
+
+        //  Cascade Detection
+        var fist = fistClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+        var left = leftClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+        var right = rightClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+        var leftPalm = lPalmClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+        var rightPalm = rPalmClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+
+        // Fire Events
+        if (fist.Length >= 1)
         {
-            Debug.Log(hand[0].Location);
-            myHand = hand[0];
-            if (myHand != null)
+            myFist = fist[0];
+            if (myFist != null)
             {
-                processImage.Rectangle(myHand, new Scalar(250, 0, 0), 2);
+                // Fire Event
+                fistDetected?.Invoke(myFist);
+                processImage.Rectangle(myFist, new Scalar(250, 0, 0), 2);
             }
         }
 
-       /* foreach (Point[] contour in contours)
+        if (left.Length >= 1)
         {
-            Point[] points = Cv2.ApproxPolyDP(contour, CurveAccuracy, true);
-            var area = Cv2.ContourArea(contour);
-
-            if (area > MinArea)
+            myLeft = left[0];
+            if (myLeft != null)
             {
-                drawContour(processImage, new Scalar(127, 127, 127), 2, points);
-                // Calcular o centro
-                Point center = new Point(0, 0);
+                // Fire Event
+                leftDetected?.Invoke(myLeft);
+                processImage.Rectangle(myLeft, new Scalar(250, 0, 0), 2);
+            }
+        }
 
-                // Iteramos por todos os pontos
-                foreach (var point in points)
-                {
-                    // Somamos todos os pontos ao centro
-                    center.X += point.X;
-                    center.Y += point.Y;
-                }
+        if (right.Length >= 1)
+        {
+            myRight = right[0];
+            if (myRight != null)
+            {
+                // Fire Event
+                rightDetected?.Invoke(myRight);
+                processImage.Rectangle(myRight, new Scalar(250, 0, 0), 2);
+            }
+        }
 
-                // Dividimos pelo numero de pontos para obter o centro
-                center.X /= points.Length;
-                center.Y /= points.Length;
-                //Debug.Log(center);
-                Cv2.Line(processImage, center, center, new Scalar(127, 127, 127), 3);
-            }            
-        }*/
+        if (leftPalm.Length >= 1)
+        {
+            myLPalm = leftPalm[0];
+            if (myLPalm != null)
+            {
+                // Fire Event
+                lPalmDetected?.Invoke(myLPalm);
+                processImage.Rectangle(myLPalm, new Scalar(250, 0, 0), 2);
+            }
+        }
+
+        if (rightPalm.Length >= 1)
+        {
+            myRPalm = rightPalm[0];
+            if (myRPalm != null)
+            {
+                // Fire Event
+                rPalmDetected?.Invoke(myRPalm);
+                processImage.Rectangle(myRPalm, new Scalar(250, 0, 0), 2);
+            }
+        }
 
         if (output == null)        
             output = OpenCvSharp.Unity.MatToTexture(showProcessingImage ? processImage : image);        
@@ -79,14 +117,5 @@ public class HandFinder : WebCamera
             OpenCvSharp.Unity.MatToTexture(showProcessingImage ? processImage : image, output);        
 
         return true;
-    }
-
-    private void drawContour(Mat Image, Scalar Color, int Thickness, Point[] Points)
-    {
-        for(int i = 1;i< Points.Length; i++)
-        {
-            Cv2.Line(Image, Points[i - 1], Points[i], Color, Thickness);
-        }
-        Cv2.Line(Image, Points[Points.Length - 1], Points[0], Color, Thickness);
     }
 }
