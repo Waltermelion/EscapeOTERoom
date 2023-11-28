@@ -65,9 +65,7 @@ public class HandFinder : WebCamera
                 fistDetected?.Invoke(myFist);
                 processImage.Rectangle(myFist, new Scalar(250, 0, 0), 2);
             }
-        }
-
-        if (left.Length >= 1)
+        }else if (left.Length >= 1)
         {
             myLeft = left[0];
             if (myLeft != null)
@@ -76,9 +74,7 @@ public class HandFinder : WebCamera
                 leftDetected?.Invoke(myLeft);
                 processImage.Rectangle(myLeft, new Scalar(250, 0, 0), 2);
             }
-        }
-
-        if (right.Length >= 1)
+        }else if (right.Length >= 1)
         {
             myRight = right[0];
             if (myRight != null)
@@ -87,9 +83,7 @@ public class HandFinder : WebCamera
                 rightDetected?.Invoke(myRight);
                 processImage.Rectangle(myRight, new Scalar(250, 0, 0), 2);
             }
-        }
-
-        if (leftPalm.Length >= 1)
+        }else if (leftPalm.Length >= 1)
         {
             myLPalm = leftPalm[0];
             if (myLPalm != null)
@@ -98,9 +92,7 @@ public class HandFinder : WebCamera
                 lPalmDetected?.Invoke(myLPalm);
                 processImage.Rectangle(myLPalm, new Scalar(250, 0, 0), 2);
             }
-        }
-
-        if (rightPalm.Length >= 1)
+        }else if (rightPalm.Length >= 1)
         {
             myRPalm = rightPalm[0];
             if (myRPalm != null)
