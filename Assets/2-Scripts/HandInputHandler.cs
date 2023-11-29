@@ -12,7 +12,7 @@ public class HandInputHandler : MonoBehaviour
         {
             camControler.GoToPos(camControler.lastPosition);
             camControler.isInPuzzle = false;
-            camControler.canRotate = false;
+            camControler.canRotate = true;
 
         }
     }
