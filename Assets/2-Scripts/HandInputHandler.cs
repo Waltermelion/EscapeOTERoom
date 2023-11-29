@@ -8,7 +8,13 @@ public class HandInputHandler : MonoBehaviour
     public Camaracontroler camControler;
     public void OnFistDetected(OpenCvSharp.Rect Rect)
     {
-        
+        if (camControler.isInPuzzle && !camControler.canRotate)
+        {
+            camControler.GoToPos(camControler.lastPosition);
+            camControler.isInPuzzle = false;
+            camControler.canRotate = false;
+
+        }
     }
     public void OnLeftDetected(OpenCvSharp.Rect Rect)
     {
@@ -32,13 +38,12 @@ public class HandInputHandler : MonoBehaviour
     {
         if (!camControler.isInPuzzle && camControler.canRotate)
         {
-            Debug.Log("First if");
             for (int i = 0; i < camControler.camPositions.Length; i++)
             {
                 if (camControler.currentPosition.transform.rotation == camControler.camPositions[i].transform.rotation)
                 {
-                    Debug.Log("second if");
-                    camControler.GoToPuzzle(camControler.puzzlePositions[i]);
+
+                    camControler.GoToPos(camControler.puzzlePositions[i].transform);
                     camControler.isInPuzzle = true;
                 }
             }            

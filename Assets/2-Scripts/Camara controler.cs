@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Camaracontroler : MonoBehaviour
 {
-    //Velocidade de rotação da camara;
+    //Velocidade de rotaï¿½ï¿½o da camara;
     [SerializeField] private float rotationSpeed;
     public GameObject[] camPositions;
     public GameObject[] puzzlePositions;
-    private GameObject lastPosition;
+    public Transform lastPosition;
     public GameObject currentPosition;
     public bool canRotate = true;
     public bool isInPuzzle = false;
@@ -17,16 +17,16 @@ public class Camaracontroler : MonoBehaviour
     {
         currentPosition = Camera.main.gameObject;
     }
-    public void GoToPuzzle(GameObject puzzlepos)
+    public void GoToPos(Transform position)
     {
-        if (puzzlepos != null)
+        if (position != null)
         {
-            StartCoroutine(GoPuzzle(puzzlepos.transform));
+            lastPosition = transform;
+            StartCoroutine(GoPuzzle(position));
         }
     }
     IEnumerator GoPuzzle(Transform puzztrans)
-    {
-        
+    {   
         while (Vector3.Distance(transform.position, puzztrans.position) > 0.01f)
         {
             //Vector3 directionToPuzzle = puzztrans.position - transform.position;
@@ -39,13 +39,13 @@ public class Camaracontroler : MonoBehaviour
         transform.rotation = puzztrans.rotation;
     }
 
-    //É chamado quando o jogador faz o gesto de rodar para a esquerda
+    //ï¿½ chamado quando o jogador faz o gesto de rodar para a esquerda
     public void RotateLeft()
     {
         StartCoroutine(RotateCameraNegative90Degrees());        
     }
 
-    //É chamado quando o jogador faz o gesto de rodar para a direita
+    //ï¿½ chamado quando o jogador faz o gesto de rodar para a direita
     public void RotateRight()
     {
         StartCoroutine(RotateCamera90Degrees());        
@@ -62,6 +62,7 @@ public class Camaracontroler : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
+        transform.rotation = targetRotation;
         canRotate = true;
     }
 
@@ -77,6 +78,7 @@ public class Camaracontroler : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
+        transform.rotation = targetRotation;
         canRotate = true;
     }
 }

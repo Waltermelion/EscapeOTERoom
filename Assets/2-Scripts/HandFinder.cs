@@ -45,7 +45,7 @@ public class HandFinder : WebCamera
         image = OpenCvSharp.Unity.TextureToMat(input);        
 
         // Image Filtering 
-        //Cv2.Flip(image, image, imageFlip);
+        Cv2.Flip(image, image, imageFlip);
         Cv2.CvtColor(image, processImage, ColorConversionCodes.BGR2GRAY);
 
         //  Cascade Detection
@@ -64,7 +64,6 @@ public class HandFinder : WebCamera
                 // Fire Event
                 fistDetected?.Invoke(myFist);
                 processImage.Rectangle(myFist, new Scalar(250, 0, 0), 2);
-                Debug.Log("Fist");
             }
         }else if (left.Length >= 1)
         {
@@ -74,7 +73,6 @@ public class HandFinder : WebCamera
                 // Fire Event
                 leftDetected?.Invoke(myLeft);
                 processImage.Rectangle(myLeft, new Scalar(250, 0, 0), 2);
-                Debug.Log("Left");
             }
         }else if (right.Length >= 1)
         {
@@ -84,7 +82,6 @@ public class HandFinder : WebCamera
                 // Fire Event
                 rightDetected?.Invoke(myRight);
                 processImage.Rectangle(myRight, new Scalar(250, 0, 0), 2);
-                Debug.Log("Right");
             }
         }else if (leftPalm.Length >= 1)
         {
@@ -94,7 +91,6 @@ public class HandFinder : WebCamera
                 // Fire Event
                 lPalmDetected?.Invoke(myLPalm);
                 processImage.Rectangle(myLPalm, new Scalar(250, 0, 0), 2);
-                Debug.Log("Left Palm");
             }
         }else if (rightPalm.Length >= 1)
         {
@@ -104,7 +100,6 @@ public class HandFinder : WebCamera
                 // Fire Event
                 rPalmDetected?.Invoke(myRPalm);
                 processImage.Rectangle(myRPalm, new Scalar(250, 0, 0), 2);
-                Debug.Log("Right Palm");
             }
         }
 
