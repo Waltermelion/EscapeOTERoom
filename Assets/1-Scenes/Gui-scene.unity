@@ -753,6 +753,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
+      propertyPath: fistDetected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
+        type: 3}
       propertyPath: leftDetected.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -766,6 +771,11 @@ PrefabInstance:
       propertyPath: rightDetected.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
+        type: 3}
+      propertyPath: fistDetected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1462026106}
     - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
       propertyPath: leftDetected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -783,8 +793,18 @@ PrefabInstance:
       objectReference: {fileID: 1462026106}
     - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
+      propertyPath: fistDetected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
+        type: 3}
       propertyPath: leftDetected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
+        type: 3}
+      propertyPath: fistDetected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnFistDetected
       objectReference: {fileID: 0}
     - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
@@ -813,6 +833,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
+      propertyPath: fistDetected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HandInputHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
+        type: 3}
       propertyPath: leftDetected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: HandInputHandler, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -825,6 +850,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rightDetected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: HandInputHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
+        type: 3}
+      propertyPath: fistDetected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
