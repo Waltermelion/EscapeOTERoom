@@ -156,3 +156,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  currentPosition: {fileID: 0}
+  canRotate: 1
+  isInPuzzle: 0
