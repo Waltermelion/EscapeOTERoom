@@ -6,6 +6,8 @@ using UnityEngine;
 public class HandInputHandler : MonoBehaviour
 {
     public Camaracontroler camControler;
+    public float hDetectedState = 0;
+
     public void OnFistDetected(OpenCvSharp.Rect Rect)
     {
         if (camControler.isInPuzzle && !camControler.canRotate)
@@ -21,14 +23,18 @@ public class HandInputHandler : MonoBehaviour
         if (!camControler.isInPuzzle)
         {
             camControler.RotateLeft();
-        }        
+        }
+
+        hDetectedState = -1f;        
     }
     public void OnRightDetected(OpenCvSharp.Rect Rect)
     {
         if (!camControler.isInPuzzle)
         {
             camControler.RotateRight();
-        }        
+        }
+
+        hDetectedState = 1f;        
     }
     public void OnLeftPalmDetected(OpenCvSharp.Rect Rect)
     {
