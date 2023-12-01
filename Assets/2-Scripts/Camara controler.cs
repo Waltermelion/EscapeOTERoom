@@ -9,6 +9,7 @@ public class Camaracontroler : MonoBehaviour
     public GameObject[] puzzlePositions;
     public Transform lastPosition;
     public GameObject currentPosition;
+    private int currentIndexPosition = 0;
     public bool canRotate = true;
     public bool isInPuzzle = false;
     private Quaternion targetRotation;
@@ -16,14 +17,39 @@ public class Camaracontroler : MonoBehaviour
     public void Start()
     {
         currentPosition = Camera.main.gameObject;
+        lastPosition = camPositions[0].transform;
     }
     public void GoToPos(Transform position)
     {
         if (position != null)
         {
-            lastPosition = transform;
-            StartCoroutine(GoPuzzle(position));
+            Debug.Log(position);
+            //lastPosition = transform;
+            StartCoroutine(GoPuzzle(position));            
         }
+    }
+    public void GoToBack(Transform position)
+    {
+        if (position != null)
+        {
+            Debug.Log(position);
+            //lastPosition = transform;
+            StartCoroutine(GoBack(position));
+        }
+    }
+    IEnumerator GoBack(Transform puzztrans)
+    {
+        while (Vector3.Distance(transform.position, puzztrans.position) > 0.01f)
+        {
+            //Vector3 directionToPuzzle = puzztrans.position - transform.position;
+            Vector3 newPosition = Vector3.Slerp(transform.position, puzztrans.position, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, puzztrans.rotation, rotationSpeed * Time.deltaTime);
+            transform.position = newPosition;
+            yield return null;
+        }
+        transform.position = puzztrans.position;
+        transform.rotation = puzztrans.rotation;
+        canRotate = true;
     }
     IEnumerator GoPuzzle(Transform puzztrans)
     {   
@@ -37,6 +63,7 @@ public class Camaracontroler : MonoBehaviour
         }
         transform.position = puzztrans.position;
         transform.rotation = puzztrans.rotation;
+        isInPuzzle = true;
     }
 
     //� chamado quando o jogador faz o gesto de rodar para a esquerda
@@ -54,7 +81,16 @@ public class Camaracontroler : MonoBehaviour
     {
         if (canRotate)
         {
-            targetRotation = Quaternion.Euler(0, transform.eulerAngles.y + 90, 0);
+            if (currentIndexPosition == 0)
+            {
+                currentIndexPosition = camPositions.Length - 1;
+                targetRotation = Quaternion.Euler(camPositions[currentIndexPosition].transform.localEulerAngles);
+            }
+            else
+            {
+                currentIndexPosition -= 1;
+                targetRotation = Quaternion.Euler(camPositions[currentIndexPosition].transform.localEulerAngles);
+            }            
             canRotate = false;
         }        
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
@@ -70,7 +106,16 @@ public class Camaracontroler : MonoBehaviour
     {
         if (canRotate)
         {
-            targetRotation = Quaternion.Euler(0, transform.eulerAngles.y - 90, 0);
+            if (currentIndexPosition == camPositions.Length - 1)
+            {
+                currentIndexPosition = 0;
+                targetRotation = Quaternion.Euler(camPositions[currentIndexPosition].transform.localEulerAngles);
+            }
+            else
+            {
+                currentIndexPosition += 1;
+                targetRotation = Quaternion.Euler(camPositions[currentIndexPosition].transform.localEulerAngles);
+            }
             canRotate = false;
         }        
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
