@@ -1438,18 +1438,33 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3571021452749211285, guid: 2a709da1bf12eee46b54be95e1cfdea1,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.021089118
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571021452749211285, guid: 2a709da1bf12eee46b54be95e1cfdea1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.021089118
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571021452749211285, guid: 2a709da1bf12eee46b54be95e1cfdea1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.021089118
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571021452749211285, guid: 2a709da1bf12eee46b54be95e1cfdea1,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.002
+      value: -0.0090977
       objectReference: {fileID: 0}
     - target: {fileID: 3571021452749211285, guid: 2a709da1bf12eee46b54be95e1cfdea1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.83531
+      value: 0.83249
       objectReference: {fileID: 0}
     - target: {fileID: 3571021452749211285, guid: 2a709da1bf12eee46b54be95e1cfdea1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.099
+      value: -8.0689
       objectReference: {fileID: 0}
     - target: {fileID: 3571021452749211285, guid: 2a709da1bf12eee46b54be95e1cfdea1,
         type: 3}
@@ -1485,6 +1500,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957251673050394349, guid: 2a709da1bf12eee46b54be95e1cfdea1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.2211
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695698545810269398, guid: 2a709da1bf12eee46b54be95e1cfdea1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7033117512783512662, guid: 2a709da1bf12eee46b54be95e1cfdea1,
         type: 3}
