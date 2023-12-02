@@ -1962,11 +1962,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3411465769254136221, guid: 87b012fb3683435448b0add09c3de3b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3880345531528081385, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
       propertyPath: fistDetected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1992,11 +1987,6 @@ PrefabInstance:
       propertyPath: rightDetected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1462026106}
-    - target: {fileID: 4140301077962405749, guid: 87b012fb3683435448b0add09c3de3b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6371809260319897228, guid: 87b012fb3683435448b0add09c3de3b3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
