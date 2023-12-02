@@ -47,6 +47,8 @@ public class HandFinder : WebCamera
         // Image Filtering 
         Cv2.Flip(image, image, imageFlip);
         Cv2.CvtColor(image, processImage, ColorConversionCodes.BGR2GRAY);
+        //Size dsize = new Size(image.Width / 2, image.Height / 2);
+        //Cv2.Resize(image, processImage, dsize);
 
         //  Cascade Detection
         var fist = fistClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
