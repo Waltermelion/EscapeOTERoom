@@ -56,6 +56,7 @@ public class HandInputHandler : MonoBehaviour
                     camControler.GoToPos(camControler.puzzlePositions[i].transform);                    
                     camControler.canRotate = false;
                     currentPuzzle = i;
+                    Debug.Log(currentPuzzle);
                 }
             }            
         }
