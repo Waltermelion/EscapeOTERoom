@@ -42,20 +42,22 @@ public class HandFinder : WebCamera
     }
     protected override bool ProcessTexture(WebCamTexture input, ref Texture2D output)
     {
-        image = OpenCvSharp.Unity.TextureToMat(input);        
+        //input.requestedWidth = 100;
+        //input.requestedHeight = 100;
+        image = OpenCvSharp.Unity.TextureToMat(input);
 
         // Image Filtering 
         Cv2.Flip(image, image, imageFlip);
         Cv2.CvtColor(image, processImage, ColorConversionCodes.BGR2GRAY);
-        //Size dsize = new Size(image.Width / 2, image.Height / 2);
+        //Size dsize = new Size(processImage.Width / 2, processImage.Height / 2);
         //Cv2.Resize(image, processImage, dsize);
 
         //  Cascade Detection
-        var fist = fistClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
-        var left = leftClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
-        var right = rightClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
-        var leftPalm = lPalmClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
-        var rightPalm = rPalmClassifier.DetectMultiScale(image, 1.1, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+        var fist = fistClassifier.DetectMultiScale(image, 1.7, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+        var left = leftClassifier.DetectMultiScale(image, 1.7, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+        var right = rightClassifier.DetectMultiScale(image, 1.7, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+        var leftPalm = lPalmClassifier.DetectMultiScale(image, 1.7, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
+        var rightPalm = rPalmClassifier.DetectMultiScale(image, 1.7, 2, HaarDetectionType.ScaleImage, new Size(10, 10), new Size());
 
         // Fire Events
         if (fist.Length >= 1)

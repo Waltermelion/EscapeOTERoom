@@ -19,7 +19,7 @@ public class HandInputHandler : MonoBehaviour
     }
     public void OnLeftDetected(OpenCvSharp.Rect Rect)
     {
-        if (!camControler.isInPuzzle)
+        if (!camControler.isInPuzzle && camControler.canRotate)
         {
             //apontar para a direita, rotate right
             camControler.RotateRight();
@@ -29,7 +29,7 @@ public class HandInputHandler : MonoBehaviour
     }
     public void OnRightDetected(OpenCvSharp.Rect Rect)
     {
-        if (!camControler.isInPuzzle)
+        if (!camControler.isInPuzzle && camControler.canRotate)
         {
             //apontar para a esquerda, rotate left
             camControler.RotateLeft();
