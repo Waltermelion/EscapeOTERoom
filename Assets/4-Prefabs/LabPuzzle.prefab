@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: -90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.2626, y: -0.0218}
+  m_AnchoredPosition: {x: 0.2211, y: -0.0218}
   m_SizeDelta: {x: 1255, y: 602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1243697089509409383
@@ -529,7 +529,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.002, y: 0.83531, z: -8.099}
-  m_LocalScale: {x: 0.015998421, y: 0.015998421, z: 0.015998421}
+  m_LocalScale: {x: 0.021089118, y: 0.021089118, z: 0.021089118}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5175892425339155179}
@@ -554,6 +554,8 @@ MonoBehaviour:
   handInputHandler: {fileID: 0}
   labAnimator: {fileID: 2271483540777408688}
   drawerAudio: {fileID: 5992165873790212564}
+  completionSound: {fileID: 8300000, guid: ebafc96a5c4292141a667c64cd5ffa23, type: 3}
+  rotatingBall: {fileID: 8300000, guid: 535099dab22de524aa5eb8958f87f157, type: 3}
 --- !u!65 &2063446827817019098
 BoxCollider:
   m_ObjectHideFlags: 0

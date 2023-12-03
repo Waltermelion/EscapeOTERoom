@@ -13,6 +13,12 @@ public class Puzzle3 : MonoBehaviour
     public int currentRotation = 0;
     public bool slotCanRotate = true;
     private Quaternion targetRotation;
+    public AudioSource relogioAudio;
+    public AudioClip completionSound;
+    public AudioClip changeSelectedAudio;
+    public AudioClip rotatingWood;
+    public GameObject clue3;
+    private bool relogioAudioPlayed;
 
     void Update()
     {
@@ -27,19 +33,11 @@ public class Puzzle3 : MonoBehaviour
     }
     void CheckSlotRotation()
     {
-        if (currentSlot == 1 && currentRotation != 2)
-        {
-            slots[1] = false;
-        }
-        else if(currentSlot == 1)
+        if (currentSlot == 1 && currentRotation != 8)
         {
             slots[1] = true;
         }
-        if (currentSlot == 0 && currentRotation != 3)
-        {
-            slots[0] = false;
-        }
-        else if(currentSlot == 0)
+        if (currentSlot == 0 && currentRotation != 9)
         {
             slots[0] = true;
         }
@@ -48,7 +46,12 @@ public class Puzzle3 : MonoBehaviour
 
         if (slots[0] == true && slots[1] == true)
         {
-            // Open Drawer Animation
+            if (!relogioAudioPlayed)
+            {
+                relogioAudio.PlayOneShot(completionSound);
+                clue3.SetActive(true);
+                relogioAudioPlayed = true;
+            }            
         }
     }
 
@@ -56,14 +59,17 @@ public class Puzzle3 : MonoBehaviour
     {
         if (handInputHandler.hDetectedState == 1f)//1 is Left
         {
+            relogioAudio.PlayOneShot(rotatingWood);
             StartCoroutine(RotateSlot90Degrees());
         }
         else if (handInputHandler.hDetectedState == 2f)//2 is right
         {
+            relogioAudio.PlayOneShot(rotatingWood);
             StartCoroutine(RotateSlotNegative90());
         }
         else if (handInputHandler.hDetectedState == 4f)
         {
+            relogioAudio.PlayOneShot(changeSelectedAudio);
             if (currentSlot == slotsGmo.Length - 1)
             {
                 currentSlot = 0;

@@ -8,6 +8,9 @@ public class Puzzle4 : MonoBehaviour
     public HandInputHandler handInputHandler;
     public Animator doorAnimator;
     public AudioSource doorAudio;
+    public AudioClip completionSound;
+    public AudioClip rotatingWood;
+    public AudioClip changeSelectedAudio;
     public GameObject winScreen;
     public bool[] slots;
     public GameObject[] slotsGmo;
@@ -31,27 +34,15 @@ public class Puzzle4 : MonoBehaviour
     }
     void CheckSlotRotation()
     {
-        if (currentSlot == 2 && currentRotation != 4)
-        {
-            slots[2] = false;
-        }
-        else if(currentSlot == 2)
+        if (currentSlot == 2 && currentRotation == 4)
         {
             slots[2] = true;
         }
-        if (currentSlot == 1 && currentRotation != 2)
-        {
-            slots[1] = false;
-        }
-        else if(currentSlot == 1)
+        if (currentSlot == 1 && currentRotation == 2)
         {
             slots[1] = true;
         }
-        if (currentSlot == 0 && currentRotation != 3)
-        {
-            slots[0] = false;
-        }
-        else if(currentSlot == 0)
+        if (currentSlot == 0 && currentRotation == 3)
         {
             slots[0] = true;
         }
@@ -62,6 +53,7 @@ public class Puzzle4 : MonoBehaviour
             if (!doorAudioPlayed)
             {
                 doorAudio.Play();
+                doorAudio.PlayOneShot(completionSound);
                 doorAudioPlayed = true;
             }
             doorAnimator.SetTrigger("opendoor");
@@ -72,14 +64,17 @@ public class Puzzle4 : MonoBehaviour
     {
         if (handInputHandler.hDetectedState == 1f)//1 is Left
         {
+            doorAudio.PlayOneShot(rotatingWood);
             StartCoroutine(RotateSlot90Degrees());
         }
         else if (handInputHandler.hDetectedState == 2f)//2 is right
         {
+            doorAudio.PlayOneShot(rotatingWood);
             StartCoroutine(RotateSlotNegative90());
         }
         else if (handInputHandler.hDetectedState == 4f)
         {
+            doorAudio.PlayOneShot(changeSelectedAudio);
             if (currentSlot == slotsGmo.Length - 1)
             {
                 currentSlot = 0;

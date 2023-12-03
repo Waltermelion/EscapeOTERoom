@@ -399,10 +399,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85553513ff830164f9599361479df04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 10
+  rotationSpeed: 1
   handInputHandler: {fileID: 0}
   doorAnimator: {fileID: 0}
   doorAudio: {fileID: 0}
+  completionSound: {fileID: 8300000, guid: ebafc96a5c4292141a667c64cd5ffa23, type: 3}
+  rotatingWood: {fileID: 8300000, guid: 992e1a5ecd432ea4eae5edd765bae654, type: 3}
+  changeSelectedAudio: {fileID: 8300000, guid: 94049e9da4525bf4b8c8507e0a403269, type: 3}
   winScreen: {fileID: 0}
   slots: 000000
   slotsGmo:

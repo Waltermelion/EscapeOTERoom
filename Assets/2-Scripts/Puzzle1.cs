@@ -7,7 +7,9 @@ public class Puzzle1 : MonoBehaviour
     public HandInputHandler handInputHandler;
     public Animator labAnimator;
     public AudioSource drawerAudio;
-    //public bool isPuzzleDone;
+    public AudioClip completionSound;
+    public AudioClip rotatingBall;
+    public bool isPuzzleDone;
 
 
     void Update()
@@ -22,6 +24,10 @@ public class Puzzle1 : MonoBehaviour
     {
         if (handInputHandler.hDetectedState == 1f)
         {
+            if (!drawerAudio.isPlaying && !isPuzzleDone)
+            {
+                drawerAudio.PlayOneShot(rotatingBall);
+            }            
             //- Z foward
             transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime);
         }
@@ -47,7 +53,10 @@ public class Puzzle1 : MonoBehaviour
         {
             //Play Animation
             labAnimator.SetTrigger("opendrawer");
+            drawerAudio.Stop();
             drawerAudio.Play();
+            drawerAudio.PlayOneShot(completionSound);
+            isPuzzleDone = true;
         }
     }
 }

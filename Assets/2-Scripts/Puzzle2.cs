@@ -13,6 +13,12 @@ public class Puzzle2 : MonoBehaviour
     public int currentRotation = 0;
     public bool slotCanRotate = true;
     private Quaternion targetRotation;
+    public Animator quadroAnimator;
+    public AudioSource drawerAudio;
+    public AudioClip rotatingWood;
+    public AudioClip completionSound;
+    public AudioClip changeSelectedAudio;
+    private bool drawerAudioPlayed = false;
 
     void Update()
     {
@@ -27,43 +33,23 @@ public class Puzzle2 : MonoBehaviour
     }
     void CheckSlotRotation()
     {
-        if (currentSlot == 4 && currentRotation != 4)
-        {
-            slots[4] = false;
-        }
-        else if(currentSlot == 2)
+        if (currentSlot == 4 && currentRotation == 1)
         {
             slots[4] = true;
         }
-        if (currentSlot == 3 && currentRotation != 4)
-        {
-            slots[3] = false;
-        }
-        else if(currentSlot == 2)
+        if (currentSlot == 3 && currentRotation == 3)
         {
             slots[3] = true;
         }
-        if (currentSlot == 2 && currentRotation != 4)
-        {
-            slots[2] = false;
-        }
-        else if(currentSlot == 2)
+        if (currentSlot == 2 && currentRotation == 5)
         {
             slots[2] = true;
         }
-        if (currentSlot == 1 && currentRotation != 2)
-        {
-            slots[1] = false;
-        }
-        else if(currentSlot == 1)
+        if (currentSlot == 1 && currentRotation == 2)
         {
             slots[1] = true;
         }
-        if (currentSlot == 0 && currentRotation != 3)
-        {
-            slots[0] = false;
-        }
-        else if(currentSlot == 0)
+        if (currentSlot == 0 && currentRotation == 4)
         {
             slots[0] = true;
         }
@@ -73,6 +59,13 @@ public class Puzzle2 : MonoBehaviour
         if (slots[0] == true && slots[1] == true && slots[2] == true && slots[3] == true && slots[4] == true)
         {
             // Open Drawer Animation
+            if (!drawerAudioPlayed)
+            {
+                drawerAudio.Play();
+                drawerAudio.PlayOneShot(completionSound);                
+                drawerAudioPlayed = true;
+            }
+            quadroAnimator.SetTrigger("opendrawer");
         }
     }
 
@@ -80,14 +73,17 @@ public class Puzzle2 : MonoBehaviour
     {
         if (handInputHandler.hDetectedState == 1f)//1 is Left
         {
+            drawerAudio.PlayOneShot(rotatingWood);
             StartCoroutine(RotateSlot90Degrees());
         }
         else if (handInputHandler.hDetectedState == 2f)//2 is right
         {
+            drawerAudio.PlayOneShot(rotatingWood);
             StartCoroutine(RotateSlotNegative90());
         }
         else if (handInputHandler.hDetectedState == 4f)
         {
+            drawerAudio.PlayOneShot(changeSelectedAudio);
             if (currentSlot == slotsGmo.Length - 1)
             {
                 currentSlot = 0;
@@ -116,12 +112,12 @@ public class Puzzle2 : MonoBehaviour
             targetRotation = Quaternion.Euler(slotRotations[currentRotation]);           
         }
         slotCanRotate = false;
-        while (Quaternion.Angle(slotsGmo[currentSlot].transform.rotation, targetRotation) > 0.01f)
+        while (Quaternion.Angle(slotsGmo[currentSlot].transform.localRotation, targetRotation) > 0.01f)
         {
-            slotsGmo[currentSlot].transform.rotation = Quaternion.Slerp(slotsGmo[currentSlot].transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            slotsGmo[currentSlot].transform.localRotation = Quaternion.Slerp(slotsGmo[currentSlot].transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
-        slotsGmo[currentSlot].transform.rotation = targetRotation;
+        slotsGmo[currentSlot].transform.localRotation = targetRotation;
         slotCanRotate = true;
     }
 
@@ -138,12 +134,12 @@ public class Puzzle2 : MonoBehaviour
             targetRotation = Quaternion.Euler(slotRotations[currentRotation]);
         }
         slotCanRotate = false;
-        while (Quaternion.Angle(slotsGmo[currentSlot].transform.rotation, targetRotation) > 0.01f)
+        while (Quaternion.Angle(slotsGmo[currentSlot].transform.localRotation, targetRotation) > 0.01f)
         {
-            slotsGmo[currentSlot].transform.rotation = Quaternion.Slerp(slotsGmo[currentSlot].transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            slotsGmo[currentSlot].transform.localRotation = Quaternion.Slerp(slotsGmo[currentSlot].transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
-        slotsGmo[currentSlot].transform.rotation = targetRotation;
+        slotsGmo[currentSlot].transform.localRotation = targetRotation;
         slotCanRotate = true;
     }
 }
