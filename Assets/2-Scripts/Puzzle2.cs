@@ -33,15 +33,15 @@ public class Puzzle2 : MonoBehaviour
     }
     void CheckSlotRotation()
     {
-        if (currentSlot == 4 && currentRotation == 1)
+        if (currentSlot == 4 && currentRotation == 3)
         {
             slots[4] = true;
         }
-        if (currentSlot == 3 && currentRotation == 3)
+        if (currentSlot == 3 && currentRotation == 0)
         {
             slots[3] = true;
         }
-        if (currentSlot == 2 && currentRotation == 5)
+        if (currentSlot == 2 && currentRotation == 4)
         {
             slots[2] = true;
         }
@@ -49,7 +49,7 @@ public class Puzzle2 : MonoBehaviour
         {
             slots[1] = true;
         }
-        if (currentSlot == 0 && currentRotation == 4)
+        if (currentSlot == 0 && currentRotation == 1)
         {
             slots[0] = true;
         }
