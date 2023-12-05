@@ -11,7 +11,7 @@ The player must navigate the room using hand gestures and complete the puzzles i
 - Tiago Moreira
 
 ## Programs used
-- Unity
+- Unity Version: 2022.3.12f1
 - Free OpenCV unity asset
 - Blender (For props)
 
