@@ -4,6 +4,8 @@ This is a project for OTE class for University, it's an escape room game played 
 
 The player must navigate the room using hand gestures and complete the puzzles inside using gestures aswell.
 
+Feel free to clone it and use it anyway you like!
+
 ## Dev Team
 - Guilherme Meneses
 - Margarida Ramos
@@ -16,6 +18,7 @@ The player must navigate the room using hand gestures and complete the puzzles i
 - Blender (For props)
 
 ## Missing features
+- Doesn't work on Build, only on Unity Editor
 - Left Hand Palm Cascade working properly
 - Labirynth puzzle is incomplete due to a lack of time to ajust for the lack of the Left Hand Palm gesture
 - Furter FPS cascade optimization
